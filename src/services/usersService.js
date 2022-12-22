@@ -6,13 +6,34 @@ class UsersService {
   listUsers = () => new Promise((resolve, reject) => {
     axios({
       method: 'GET',
-      url: `${API_BASE_URL_SEC}/v1/users?limit=500`,
+      url: `${API_BASE_URL_SEC}/v1/users?limit=1000`,
       headers: {
         'x-access-token': authService.getAccessToken(),
       },
     })
       .then((res) => {
         resolve(res.data.data.users);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  createUser = (firstName, lastName, city, phoneNumber, email, password) => new Promise((resolve, reject) => {
+    axios.post(`${API_BASE_URL_SEC}/v1/users`, {
+      firstName: firstName,
+      lastName: lastName,
+      city: city,
+      phoneNumber: phoneNumber,
+      email: email,
+      password: password
+    }, {
+      headers: {
+        'x-access-token': authService.getAccessToken(),
+      },
+    })
+      .then((res) => {
+        resolve();
       })
       .catch((err) => {
         reject(err);

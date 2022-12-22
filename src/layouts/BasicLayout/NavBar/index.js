@@ -1,9 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import {
   makeStyles,
   Drawer,
   Hidden,
-  Box
+  Box,
+  Button
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Logo from 'src/components/Logo';
@@ -22,6 +24,15 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar({ onMobileNavClose, openMobile }) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleUserListButton = () => {
+    history.push('/app/users');
+  };
+
+  const handleCreateUserButton = () => {
+    history.push('/app/create-user');
+  };
 
   return (
     <>
@@ -41,6 +52,16 @@ function NavBar({ onMobileNavClose, openMobile }) {
           >
             <Logo className={classes.logo} />
           </Box>
+          <Box>
+            <Button onClick={handleUserListButton}>
+              User list
+            </Button>
+          </Box>
+          <Box>
+            <Button onClick={handleCreateUserButton}>
+              Créer un user
+            </Button>
+          </Box>
         </Drawer>
       </Hidden>
       <Hidden mdDown>
@@ -57,6 +78,16 @@ function NavBar({ onMobileNavClose, openMobile }) {
             justifyContent="center"
           >
             <Logo className={classes.logo} />
+          </Box>
+          <Box>
+            <Button onClick={handleUserListButton}>
+              User list
+            </Button>
+          </Box>
+          <Box>
+            <Button onClick={handleCreateUserButton}>
+              Créer un user
+            </Button>
           </Box>
         </Drawer>
       </Hidden>
