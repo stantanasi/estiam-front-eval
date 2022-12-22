@@ -12,7 +12,7 @@ class UsersService {
       },
     })
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data.data.users);
       })
       .catch((err) => {
         reject(err);
