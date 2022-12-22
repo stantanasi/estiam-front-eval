@@ -9,12 +9,17 @@ import {
   DialogActions,
   Button
 } from '@material-ui/core';
+import usersService from 'src/services/usersService';
 
 function UserModal({ open, handleClose, userProfile, className, ...rest }) {
   const history = useHistory();
 
   const handleOnUpdateClick = () => {
     history.push(`/app/update-user/${userProfile.id}`);
+  }
+  const handleOnDeleteClick = () => {
+    usersService.deleteUser(userProfile.id)
+      .then(() => history.go(0))
   }
 
   return (
@@ -36,6 +41,9 @@ function UserModal({ open, handleClose, userProfile, className, ...rest }) {
         </DialogContentText>
         <Button onClick={handleOnUpdateClick}>
           Update
+        </Button>
+        <Button onClick={handleOnDeleteClick}>
+          Delete
         </Button>
       </DialogContent>
       <DialogActions>
