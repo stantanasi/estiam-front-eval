@@ -43,7 +43,7 @@ function CreateUserView() {
     if (params.id) {
       getUser(params.id);
     }
-  }, [getUser]);
+  }, [params.id, getUser]);
 
   return (
     <Page
