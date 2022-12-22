@@ -26,6 +26,10 @@ function NavBar({ onMobileNavClose, openMobile }) {
   const classes = useStyles();
   const history = useHistory();
 
+  const handleUserListButton = () => {
+    history.push('/app/users');
+  };
+
   const handleCreateUserButton = () => {
     history.push('/app/create-user');
   };
@@ -49,6 +53,11 @@ function NavBar({ onMobileNavClose, openMobile }) {
             <Logo className={classes.logo} />
           </Box>
           <Box>
+            <Button onClick={handleUserListButton}>
+              User list
+            </Button>
+          </Box>
+          <Box>
             <Button onClick={handleCreateUserButton}>
               Créer un user
             </Button>
@@ -69,6 +78,11 @@ function NavBar({ onMobileNavClose, openMobile }) {
             justifyContent="center"
           >
             <Logo className={classes.logo} />
+          </Box>
+          <Box>
+            <Button onClick={handleUserListButton}>
+              User list
+            </Button>
           </Box>
           <Box>
             <Button onClick={handleCreateUserButton}>
