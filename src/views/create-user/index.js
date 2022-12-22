@@ -11,6 +11,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import usersService from 'src/services/usersService';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,6 +56,28 @@ function CreateUserView() {
               .required('Email is required'),
             password: Yup.string().max(255).required('Password is required')
           })}
+          onSubmit={async (values, {
+            setErrors,
+            setStatus,
+            setSubmitting
+          }) => {
+            usersService.createUser(
+              values.firstName,
+              values.lastName,
+              values.email,
+              values.password
+            )
+              .then(() => {
+                onUserCreated();
+              })
+              .catch((error) => {
+                const message = (error.response && error.response.data.data) || 'Something went wrong';
+
+                setStatus({ success: false });
+                setErrors({ submit: message });
+                setSubmitting(false);
+              });
+          }}
         >
           {({
             errors,
