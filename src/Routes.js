@@ -35,7 +35,12 @@ const routesConfig = [
         exact: true,
         path: '/app/users',
         component: lazy(() => import('src/views/users'))
-      }
+      },
+      {
+        exact: true,
+        path: '/app/create-user',
+        component: lazy(() => import('src/views/create-user'))
+      },
     ]
   },
   {
