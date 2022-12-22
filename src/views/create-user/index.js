@@ -42,10 +42,6 @@ function CreateUserView() {
       <Container maxWidth="md">
         <Formik
           initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: ''
           }}
           validationSchema={Yup.object().shape({
             firstName: Yup.string().max(255).required('First name is required'),
