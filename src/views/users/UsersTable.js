@@ -48,6 +48,7 @@ function UsersTable({ className, users, testButtonClicked, ...rest }) {
 
   const handleUserProfile = profile => {
     setUserProfile({
+      id: profile.id,
       firstName: profile.firstName,
       lastName: profile.lastName,
       phoneNumber: profile.phoneNumber,
