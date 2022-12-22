@@ -70,7 +70,7 @@ class UsersService {
       },
     })
       .then((res) => {
-        resolve(res.data.data);
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err);
