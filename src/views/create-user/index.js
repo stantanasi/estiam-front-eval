@@ -121,6 +121,34 @@ function CreateUserView() {
                 variant="outlined"
               />
               <TextField
+                error={Boolean(touched.city && errors.city)}
+                fullWidth
+                autoFocus
+                helperText={touched.city && errors.city}
+                label="City"
+                margin="normal"
+                name="city"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="city"
+                value={values.city}
+                variant="outlined"
+              />
+              <TextField
+                error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+                fullWidth
+                autoFocus
+                helperText={touched.phoneNumber && errors.phoneNumber}
+                label="Phone number"
+                margin="normal"
+                name="phoneNumber"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="name"
+                value={values.phoneNumber}
+                variant="outlined"
+              />
+              <TextField
                 error={Boolean(touched.email && errors.email)}
                 fullWidth
                 autoFocus
