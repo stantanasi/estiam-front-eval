@@ -19,10 +19,12 @@ class UsersService {
       });
   });
 
-  createUser = (firstName, lastName, email, password) => new Promise((resolve, reject) => {
+  createUser = (firstName, lastName, city, phoneNumber, email, password) => new Promise((resolve, reject) => {
     axios.post(`${API_BASE_URL_SEC}/v1/users`, {
       firstName: firstName,
       lastName: lastName,
+      city: city,
+      phoneNumber: phoneNumber,
       email: email,
       password: password
     }, {

@@ -40,6 +40,8 @@ function UserForm({ className, onUserCreated, ...rest }) {
         usersService.createUser(
           values.firstName,
           values.lastName,
+          values.city,
+          values.phoneNumber,
           values.email,
           values.password
         )
