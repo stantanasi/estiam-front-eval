@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
   Box,
@@ -45,6 +46,15 @@ function CreateUserView() {
             email: '',
             password: ''
           }}
+          validationSchema={Yup.object().shape({
+            firstName: Yup.string().max(255).required('First name is required'),
+            lastName: Yup.string().max(255).required('Last name is required'),
+            email: Yup.string().email('Must be a valid email')
+              .max(255)
+              .min(10)
+              .required('Email is required'),
+            password: Yup.string().max(255).required('Password is required')
+          })}
         >
           {({
             errors,
