@@ -39,6 +39,43 @@ class UsersService {
         reject(err);
       });
   });
+
+  getUser = (id) => new Promise((resolve, reject) => {
+    axios({
+      method: 'GET',
+      url: `${API_BASE_URL_SEC}/v1/users/${id}`,
+      headers: {
+        'x-access-token': authService.getAccessToken(),
+      },
+    })
+      .then((res) => {
+        resolve(res.data.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  updateUser = (id, firstName, lastName, city, phoneNumber, email, password) => new Promise((resolve, reject) => {
+    axios.put(`${API_BASE_URL_SEC}/v1/users/${id}`, {
+      firstName: firstName,
+      lastName: lastName,
+      city: city,
+      phoneNumber: phoneNumber,
+      email: email,
+      password: password
+    }, {
+      headers: {
+        'x-access-token': authService.getAccessToken(),
+      },
+    })
+      .then((res) => {
+        resolve(res.data.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 }
 
 const usersService = new UsersService();

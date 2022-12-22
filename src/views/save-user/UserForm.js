@@ -16,12 +16,18 @@ const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-function UserForm({ className, onUserCreated, ...rest }) {
+function UserForm({ className, user, onUserCreated, ...rest }) {
   const classes = useStyles();
 
   return (
     <Formik
-      initialValues={{
+      enableReinitialize
+      initialValues={user ?? {
+        firstName: '',
+        lastName: '',
+        city: '',
+        phoneNumber: '',
+        email: '',
       }}
       validationSchema={Yup.object().shape({
         firstName: Yup.string().max(255).required('First name is required'),
@@ -37,14 +43,26 @@ function UserForm({ className, onUserCreated, ...rest }) {
         setStatus,
         setSubmitting
       }) => {
-        usersService.createUser(
-          values.firstName,
-          values.lastName,
-          values.city,
-          values.phoneNumber,
-          values.email,
-          values.password
-        )
+        const saveUser = user ?
+          usersService.updateUser(
+            user.id,
+            values.firstName,
+            values.lastName,
+            values.city,
+            values.phoneNumber,
+            values.email,
+            values.password
+          ) :
+          usersService.createUser(
+            values.firstName,
+            values.lastName,
+            values.city,
+            values.phoneNumber,
+            values.email,
+            values.password
+          )
+
+        saveUser
           .then(() => {
             onUserCreated();
           })
@@ -164,7 +182,7 @@ function UserForm({ className, onUserCreated, ...rest }) {
               type="submit"
               variant="contained"
             >
-              Create
+              {user ? 'Update' : 'Create'}
             </Button>
             {errors.submit && (
               <Box mt={3}>
@@ -182,10 +200,12 @@ function UserForm({ className, onUserCreated, ...rest }) {
 
 UserForm.propTypes = {
   className: PropTypes.string,
+  user: PropTypes.object,
   onUserCreated: PropTypes.func
 };
 
 UserForm.defaultProps = {
+  user: undefined,
   onUserCreated: () => { }
 };
 

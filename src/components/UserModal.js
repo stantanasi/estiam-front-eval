@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 import {
   Dialog,
   DialogTitle,
@@ -10,6 +11,12 @@ import {
 } from '@material-ui/core';
 
 function UserModal({ open, handleClose, userProfile, className, ...rest }) {
+  const history = useHistory();
+
+  const handleOnUpdateClick = () => {
+    history.push(`/app/update-user/${userProfile.id}`);
+  }
+
   return (
     <Dialog
       open={open}
@@ -27,6 +34,9 @@ function UserModal({ open, handleClose, userProfile, className, ...rest }) {
           <br />
           {userProfile.city}
         </DialogContentText>
+        <Button onClick={handleOnUpdateClick}>
+          Update
+        </Button>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
