@@ -38,7 +38,14 @@ function CreateUserView() {
       title="Create user"
     >
       <Container maxWidth="md">
-        <Formik>
+        <Formik
+          initialValues={{
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: ''
+          }}
+        >
           {({
             errors,
             handleBlur,
