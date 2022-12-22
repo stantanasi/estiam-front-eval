@@ -18,6 +18,25 @@ class UsersService {
         reject(err);
       });
   });
+
+  createUser = (firstName, lastName, email, password) => new Promise((resolve, reject) => {
+    axios.post(`${API_BASE_URL_SEC}/v1/users`, {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    }, {
+      headers: {
+        'x-access-token': authService.getAccessToken(),
+      },
+    })
+      .then((res) => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 }
 
 const usersService = new UsersService();
