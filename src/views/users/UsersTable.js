@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import UserModal from 'src/components/UserModal';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {}
 }));
 
@@ -29,10 +29,10 @@ function UsersTable({ className, users, testButtonClicked, ...rest }) {
 
   const [open, setOpen] = useState(false);
   const [userProfile, setUserProfile] = useState({
-    name: '',
-    username: '',
-    phone: '',
-    companyName: ''
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    city: ''
   });
 
   const [page, setPage] = useState(0); // page
@@ -42,16 +42,16 @@ function UsersTable({ className, users, testButtonClicked, ...rest }) {
     setPage(newPage);
   };
 
-  const handleRowsPerPage = (event) => {
+  const handleRowsPerPage = event => {
     setRowPerPage(event.target.value);
   };
 
-  const handleUserProfile = (profile) => {
+  const handleUserProfile = profile => {
     setUserProfile({
-      name: profile.name,
-      username: profile.username,
-      phone: profile.phone,
-      companyName: profile.company.name
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      phoneNumber: profile.phoneNumber,
+      city: profile.city
     });
     setOpen(true);
   };
@@ -63,37 +63,25 @@ function UsersTable({ className, users, testButtonClicked, ...rest }) {
   const usersToDisplay = applyPagination(users, page, rowPerPage);
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card className={clsx(classes.root, className)} {...rest}>
       <Box>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
-                Name
-              </TableCell>
-              <TableCell>
-                Email
-              </TableCell>
-              <TableCell>
-              </TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {
-              usersToDisplay && usersToDisplay.map((user) => {
+            {usersToDisplay &&
+              usersToDisplay.map(user => {
                 return (
-                  <TableRow
-                    key={user.id}
-                  >
+                  <TableRow key={user.id}>
                     <TableCell>
                       {user.firstName} {user.lastName}
                     </TableCell>
-                    <TableCell>
-                      {user.email}
-                    </TableCell>
+                    <TableCell>{user.email}</TableCell>
                     <TableCell>
                       <Button
                         color="secondary"
@@ -107,8 +95,7 @@ function UsersTable({ className, users, testButtonClicked, ...rest }) {
                     </TableCell>
                   </TableRow>
                 );
-              })
-            }
+              })}
           </TableBody>
         </Table>
       </Box>
@@ -134,7 +121,7 @@ function UsersTable({ className, users, testButtonClicked, ...rest }) {
 UsersTable.prototype = {
   className: PropTypes.string,
   users: PropTypes.array,
-  testButtonClicked: PropTypes.any,
+  testButtonClicked: PropTypes.any
 };
 
 UsersTable.defaultProps = {
