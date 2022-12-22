@@ -70,7 +70,21 @@ class UsersService {
       },
     })
       .then((res) => {
-        resolve(res.data.data);
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  deleteUser = (id) => new Promise((resolve, reject) => {
+    axios.delete(`${API_BASE_URL_SEC}/v1/users/${id}`, {
+      headers: {
+        'x-access-token': authService.getAccessToken(),
+      },
+    })
+      .then((res) => {
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err);
