@@ -43,14 +43,26 @@ function UserForm({ className, user, onUserCreated, ...rest }) {
         setStatus,
         setSubmitting
       }) => {
-        usersService.createUser(
-          values.firstName,
-          values.lastName,
-          values.city,
-          values.phoneNumber,
-          values.email,
-          values.password
-        )
+        const saveUser = user ?
+          usersService.updateUser(
+            user.id,
+            values.firstName,
+            values.lastName,
+            values.city,
+            values.phoneNumber,
+            values.email,
+            values.password
+          ) :
+          usersService.createUser(
+            values.firstName,
+            values.lastName,
+            values.city,
+            values.phoneNumber,
+            values.email,
+            values.password
+          )
+
+        saveUser
           .then(() => {
             onUserCreated();
           })
