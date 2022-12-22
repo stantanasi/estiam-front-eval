@@ -25,23 +25,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const doSomethingBig = (test) => {
-  console.log('Processing big data');
-};
-
 function UsersListView() {
   const classes = useStyles();
   const userName = useContext(UserContext);
   const isMountedRef = useIsMountedRef();
-  const [data] = useAxios('https://jsonplaceholder.typicode.com/users');
 
   const [usersCount, setUsersCount] = useState(0);
   const [users, setUsers] = useState([]);
-  const [test, setTest] = useState('');
-
-  const getData = useMemo(() => {
-    doSomethingBig(test);
-  }, [test]);
 
   const getUsers = useCallback(() => {
     usersService.listUsers()
@@ -58,7 +48,7 @@ function UsersListView() {
     console.log(userName);
 
     getUsers();
-  }, [getUsers, data]);
+  }, [getUsers]);
 
   const testButtonClicked = () => {};
 
@@ -71,7 +61,7 @@ function UsersListView() {
         <Header usersCount={usersCount} />
 
         <Box mt={3}>
-          <UsersTable users={data} testButtonClicked={testButtonClicked} />
+          <UsersTable users={users} testButtonClicked={testButtonClicked} />
         </Box>
       </Container>
     </Page>
