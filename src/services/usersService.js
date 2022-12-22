@@ -6,7 +6,7 @@ class UsersService {
   listUsers = () => new Promise((resolve, reject) => {
     axios({
       method: 'GET',
-      url: `${API_BASE_URL_SEC}/v1/users`,
+      url: `${API_BASE_URL_SEC}/v1/users?limit=500`,
       headers: {
         'x-access-token': authService.getAccessToken(),
       },
