@@ -89,7 +89,7 @@ function UsersTable({ className, users, testButtonClicked, ...rest }) {
                     key={user.id}
                   >
                     <TableCell>
-                      {user.name}
+                      {user.firstName} {user.lastName}
                     </TableCell>
                     <TableCell>
                       {user.email}
