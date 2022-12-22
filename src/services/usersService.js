@@ -39,6 +39,22 @@ class UsersService {
         reject(err);
       });
   });
+
+  getUser = (id) => new Promise((resolve, reject) => {
+    axios({
+      method: 'GET',
+      url: `${API_BASE_URL_SEC}/v1/users/${id}`,
+      headers: {
+        'x-access-token': authService.getAccessToken(),
+      },
+    })
+      .then((res) => {
+        resolve(res.data.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 }
 
 const usersService = new UsersService();
